@@ -10,11 +10,6 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
-    "paths": {
-      "moon-lib": [
-        "./dist/moon-lib"
-      ]
-    },
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,
