@@ -5,11 +5,6 @@
   "projects": {
     "moon-lib": {
       "projectType": "library",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
       "root": "projects/moon-lib",
       "sourceRoot": "projects/moon-lib/src",
       "prefix": "moon",
@@ -72,7 +67,12 @@
             "styles": [
               "projects/moon-ui/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "server": "projects/moon-ui/src/main.server.ts",
+            "prerender": true,
+            "ssr": {
+              "entry": "projects/moon-ui/server.ts"
+            }
           },
           "configurations": {
             "production": {

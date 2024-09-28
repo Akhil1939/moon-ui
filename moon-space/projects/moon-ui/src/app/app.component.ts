@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MoonLibComponent } from 'moon-lib';
+import { MoonLibComponent } from '@moon';
 
 @Component({
   selector: 'app-root',
