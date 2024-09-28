@@ -1,0 +1,15 @@
+body{
+    font-family: Inter, "Helvetica Neue", sans-serif;;
+}
+.cdk-overlay-container{
+    z-index:1000000 ;
+}
+.mat-mdc-form-field .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mdc-text-field__input {
+    line-height: 15px !important;
+}
+#SearchCustomerHeader .row .form-block{
+    margin-top: 18px;
+}
+.page-title-with-action .row{
+    align-items: center !important;
+}
