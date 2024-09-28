@@ -1,96 +1,96 @@
 @if(isLoaded){
 
-    <form [formGroup]="formGroup">
-        @if(isAllowMultiple){
-        @if(!options.isFloatLabel){
-        <label class="form-field-label" [ngClass]="{'has-error': isError}">{{options.label}}</label>
+<form [formGroup]="formGroup">
+    @if(isAllowMultiple){
+    @if(!options().isFloatLabel){
+    <label class="form-field-label" [className]="{'has-error': isError}">{{options().label}}</label>
+    }
+    <mat-form-field [classList]="options().classes ?? '' " [appearance]="this.options().appearance ??'outline'"
+        subscriptSizing="dynamic">
+        @if(options().isFloatLabel){
+        <mat-label>{{options().label}}</mat-label>
         }
-        <mat-form-field [ngClass]="options.classes ?? '' " [appearance]="this.options.appearance ??'outline'"
-            subscriptSizing="dynamic">
-            @if(options.isFloatLabel){
-            <mat-label>{{options.label}}</mat-label>
-            }
-            <mat-select [id]="options.id ?? ''" [formControlName]="formControlName" multiple
-                [disabled]="options.disabled ?? false">
-                @if(showSelectedCount){
-                <mat-select-trigger class="custom-mat-select-trigger" [ngClass]="selectedItemClass">
-                    @if(selectedItemsCount <= chipCount && dropdownModelValue){ <mat-chip-set>
-                        <ng-container>
-                            @for(option of selectedChips; track option){
-                            <mat-chip [removable]="true" (removed)="removeOption(option)">
-                                {{ getMultiSelectedOptionForDisplay(option) }}
-                                <mat-icon class="item-remove" matChipRemove>cancel</mat-icon>
-                            </mat-chip>
-                            }
-                        </ng-container>
-                        </mat-chip-set>
+        <mat-select [id]="options().id ?? ''" [formControlName]="formControlName" multiple
+            [disabled]="options().disabled ?? false">
+            @if(showSelectedCount){
+            <mat-select-trigger class="custom-mat-select-trigger" [className]="selectedItemClass">
+                @if(selectedItemsCount <= chipCount && dropdownModelValue){ <mat-chip-set>
+                    <ng-container>
+                        @for(option of selectedChips; track option){
+                        <mat-chip [removable]="true" (removed)="removeOption(option)">
+                            {{ getMultiSelectedOptionForDisplay(option) }}
+                            <mat-icon class="item-remove" matChipRemove>cancel</mat-icon>
+                        </mat-chip>
                         }
-                        @if(selectedItemsCount > chipCount){
-                        <span>
-                            {{ selectedItemsCount }} Items Selected
-                        </span>
-                        }
-                        @if(isAllowClear && (selectedItemsCount > selectedItemsToDisplay)){
-                        <span class="clear-input" (click)="clear()" matSuffix>clear</span>
-                        }
-                </mat-select-trigger>
-                }
-                @if(isAllowSearching){
-                <mat-option>
-                    <ngx-mat-select-search [formControl]="dropdownSearchCtrl" [placeholderLabel]="searchPlaceholderLabel"
-                        [noEntriesFoundLabel]="searchNoEntriesFoundLabel" [hideClearSearchButton]="hideClearSearchButton"
-                        [showToggleAllCheckbox]="showToggleAllCheckbox" [toggleAllCheckboxChecked]="isChecked"
-                        [toggleAllCheckboxIndeterminate]="isIndeterminate"
-                        (toggleAll)="toggleSelectAll($event)"></ngx-mat-select-search>
-                </mat-option>
-                }
-    
-                @for(option of dropDownOptions; track option.value){
-                <mat-option #matOption [value]="option.value" (click)="optionClick()">
-                    {{option.text}}
-                </mat-option>
-                }
-            </mat-select>
-        </mat-form-field>
-        <lib-error-message [options]="errorConfig"></lib-error-message>
-        }@else{
-        @if(!options.isFloatLabel){
-        <label class="form-field-label" [ngClass]="{'has-error': isError}">{{options.label}}</label>
-        }
-        <mat-form-field [ngClass]="options.classes ?? '' " [appearance]="options.appearance ??'outline'"
-            subscriptSizing="dynamic">
-            @if(options.isFloatLabel){
-            <mat-label>{{options.label}}</mat-label>
-            }
-            <mat-select [id]="options.id ?? ''" (selectionChange)="selectionChange()" [formControlName]="formControlName"
-                [disabled]="options.disabled ?? false">
-                <mat-select-trigger class="custom-mat-select-trigger">
-                    <span>{{getSelectedOptionForDisplay()}}</span>
-                    @if(isAllowClear){
+                    </ng-container>
+                    </mat-chip-set>
+                    }
+                    @if(selectedItemsCount > chipCount){
+                    <span>
+                        {{ selectedItemsCount }} Items Selected
+                    </span>
+                    }
+                    @if(isAllowClear && (selectedItemsCount > selectedItemsToDisplay)){
                     <span class="clear-input" (click)="clear()" matSuffix>clear</span>
                     }
-                </mat-select-trigger>
-                @if(isAllowSearching){
-                <mat-option>
-                    <ngx-mat-select-search [formControl]="dropdownSearchCtrl" [placeholderLabel]="searchPlaceholderLabel"
-                        [noEntriesFoundLabel]="searchNoEntriesFoundLabel"
-                        [hideClearSearchButton]="hideClearSearchButton"></ngx-mat-select-search>
-                </mat-option>
-                }
-                @if(options.label){
-    
-                <mat-option selected="true">
-                    {{options.label}}
-                </mat-option>
-                }
-                @for(option of dropDownOptions; track option.value){
-                <mat-option [value]="option.value">
-                    {{option.text}}
-                </mat-option>
-                }
-            </mat-select>
-        </mat-form-field>
-        <lib-error-message [options]="errorConfig"></lib-error-message>
-        }
-    </form>
+            </mat-select-trigger>
+            }
+            @if(isAllowSearching){
+            <mat-option>
+                <ngx-mat-select-search [formControl]="dropdownSearchCtrl" [placeholderLabel]="searchPlaceholderLabel"
+                    [noEntriesFoundLabel]="searchNoEntriesFoundLabel" [hideClearSearchButton]="hideClearSearchButton"
+                    [showToggleAllCheckbox]="showToggleAllCheckbox" [toggleAllCheckboxChecked]="isChecked"
+                    [toggleAllCheckboxIndeterminate]="isIndeterminate"
+                    (toggleAll)="toggleSelectAll($event)"></ngx-mat-select-search>
+            </mat-option>
+            }
+
+            @for(option of dropDownOptions; track option.value){
+            <mat-option #matOption [value]="option.value" (click)="optionClick()">
+                {{option.text}}
+            </mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+    <!-- <lib-error-message [options]="errorConfig"></lib-error-message> -->
+    }@else{
+    @if(!options().isFloatLabel){
+    <label class="form-field-label" [className]="{'has-error': isError}">{{options().label}}</label>
     }
+    <mat-form-field [classList]="options().classes ?? '' " [appearance]="options().appearance ??'outline'"
+        subscriptSizing="dynamic">
+        @if(options().isFloatLabel){
+        <mat-label>{{options().label}}</mat-label>
+        }
+        <mat-select [id]="options().id ?? ''" (selectionChange)="selectionChange()" [formControlName]="formControlName"
+            [disabled]="options().disabled ?? false">
+            <mat-select-trigger class="custom-mat-select-trigger">
+                <span>{{getSelectedOptionForDisplay()}}</span>
+                @if(isAllowClear){
+                <span class="clear-input" (click)="clear()" matSuffix>clear</span>
+                }
+            </mat-select-trigger>
+            @if(isAllowSearching){
+            <mat-option>
+                <ngx-mat-select-search [formControl]="dropdownSearchCtrl" [placeholderLabel]="searchPlaceholderLabel"
+                    [noEntriesFoundLabel]="searchNoEntriesFoundLabel"
+                    [hideClearSearchButton]="hideClearSearchButton"></ngx-mat-select-search>
+            </mat-option>
+            }
+            @if(options().label){
+
+            <mat-option selected="true">
+                {{options().label}}
+            </mat-option>
+            }
+            @for(option of dropDownOptions; track option.value){
+            <mat-option [value]="option.value">
+                {{option.text}}
+            </mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+    <!-- <lib-error-message [options]="errorConfig"></lib-error-message> -->
+    }
+</form>
+}

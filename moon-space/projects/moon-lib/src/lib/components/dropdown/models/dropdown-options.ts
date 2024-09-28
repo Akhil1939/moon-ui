@@ -1,7 +1,7 @@
-import { BehaviorSubject, Subject } from 'rxjs';
-import { FormBaseOptions } from '../../../shared/models/common-field-options';
-import { TextValueOptionConfig } from '../../../shared/models/text-value-option-config';
-import { DropDownFeature } from './dropdown-feature';
+import { BehaviorSubject } from "rxjs";
+import { FormBaseOptions, TextValueOptionConfig } from "../../../shared/models";
+import { DropDownFeature } from "./dropdown-feature";
+
 
 /**
  * Configuration for a dropdown/select component.
