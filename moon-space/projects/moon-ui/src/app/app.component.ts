@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { DropdownOptions, MoonLibComponent, DropdownComponent } from '@moon';
@@ -19,12 +19,9 @@ export class AppComponent {
   title = 'moon-ui';
   dropdown!: DropdownOptions;
   form: FormGroup = new FormGroup({
-    dropdown: new FormControl(['1A', '1B']),
+    dropdown: new FormControl(['A']),
   });
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-
     this.dropdown = {
       label: 'Dropdown',
       isFloatLabel: true,
@@ -34,20 +31,22 @@ export class AppComponent {
       features:{
         allowSearching: true,
         allowMultiple:true,
+        showSelectedCount:true,
+        allowClear:true,
       },
       selectionChange: () => {},
     };
 
     setTimeout(() => {
       this.dropdown.data = [
-        { text: 'Item A1', value: '1A' },
-        { text: 'Item A2', value: '1B' },
-        { text: 'Item A3', value: '1C' },
-        {text: 'Item A4', value: '1D'},
-        { text: 'Item A5', value: '1E'},
-        {text:'Item A', value: '1F'}
+        { text: 'Item A1', value: 'A' },
+        { text: 'Item A2', value: 'B' },
+        { text: 'Item A3', value: 'C' },
+        {text: 'Item A4', value: 'D'},
+        { text: 'Item A5', value: 'E'},
+        {text:'Item A', value: 'F'}
       ];
-    }, 5000);
+    }, 2000);
     this.form.valueChanges.subscribe(() => {
       console.log(this.form.value)
     });

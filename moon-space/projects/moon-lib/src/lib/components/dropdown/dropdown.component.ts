@@ -1,6 +1,8 @@
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  effect,
   ElementRef,
   input,
   signal,
@@ -31,25 +33,26 @@ export class DropdownComponent {
   data = this.displayOptions();
   dropdownModelValue: any;
   formGroup!: FormGroup;
-  selectedItemsToDisplay: number = 0;
+  selectedItemsToDisplay: number = 3;
   isLoaded: boolean = false;
   public dropdownSearchCtrl: FormControl<string | null> = new FormControl<
     string | null
   >('');
-  toppingList: string[] = [
-    'Extra cheese',
-    'Mushroom',
-    'Onion',
-    'Pepperoni',
-    'Sausage',
-    'Tomato',
-  ];
+  isChecked: boolean = false;
+  isIndeterminate: boolean = false;
+  allOptions!: (number | string)[];
   @ViewChild('matOption') matOption!: ElementRef;
 
   constructor(
     private controlContainer: ControlContainer,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) {
+    effect(() => {
+      console.log('Signal changed:', this.options());
+      this.setControlDefaultValue();
+      this.setSelectedValue();
+    });
+  }
 
   ngOnInit(): void {
     this.formGroup = <FormGroup>this.controlContainer.control;
@@ -126,7 +129,7 @@ export class DropdownComponent {
   };
   setFormControlValue = (): void => {
     this.control.setValue(this.dropdownModelValue);
-    console.log("controlvalue", this.control.value)
+    console.log('controlvalue', this.control.value);
     this.control.updateValueAndValidity();
     if (this.options().selectionChange) {
       if (
@@ -186,25 +189,34 @@ export class DropdownComponent {
     }
     return option;
   }
+  toggleSelectAll = (selectAllValue: boolean): void => {
+    if (selectAllValue) {
+      this.allOptions = Array.from(
+        this.displayOptions()?.map((x) => {
+          return x.value;
+        })
+      );
+    }
+  };
   private setToggleState = (): void => {
-    // const selectedValue = this.control?.value
-    //   ? Array.from(this.control.value)
-    //   : [];
-    // if (selectedValue.length > 0 && this.displayOptions().length > 0) {
-    //   this.isIndeterminate =
-    //     this.dropDownOptions.length >
-    //     this.dropDownOptions.filter(
-    //       (x) => selectedValue.findIndex((y) => y == x.value) > -1
-    //     ).length;
-    //   this.isChecked =
-    //     this.dropDownOptions.length ==
-    //     this.dropDownOptions.filter(
-    //       (x) => selectedValue.findIndex((y) => y == x.value) > -1
-    //     ).length;
-    // } else {
-    //   this.isIndeterminate = false;
-    //   this.isChecked = false;
-    // }
+    const selectedValue = this.control?.value
+      ? Array.from(this.control.value)
+      : [];
+    if (selectedValue.length > 0 && this.displayOptions().length > 0) {
+      this.isIndeterminate =
+        this.displayOptions().length >
+        this.displayOptions().filter(
+          (x) => selectedValue.findIndex((y) => y == x.value) > -1
+        ).length;
+      this.isChecked =
+        this.displayOptions().length ==
+        this.displayOptions().filter(
+          (x) => selectedValue.findIndex((y) => y == x.value) > -1
+        ).length;
+    } else {
+      this.isIndeterminate = false;
+      this.isChecked = false;
+    }
   };
 
   private setControlDefaultValue = (): void => {
@@ -213,14 +225,26 @@ export class DropdownComponent {
     }
   };
   private setSelectedValue = (): void => {
-    if (this.options().features?.allowMultiple && this.control?.value) {
-      let selectedValue = Array.from(new Set(this.control?.value));
+    if (
+      this.options()?.features?.allowMultiple &&
+      this.control?.value &&
+      this.options().data.length > 0
+    ) {
+      // Ensure value is an array and remove duplicates
+      let selectedValue = Array.isArray(this.control.value)
+        ? Array.from(new Set(this.control.value))
+        : [];
+
+      // Filter to include only valid values from textvalue array
       selectedValue = selectedValue.filter(
         (x) => this.options().data.findIndex((y) => y.value == x) > -1
       );
+
+      // Update control value without emitting event
       this.control.setValue(selectedValue, { emitEvent: false });
       this.dropdownModelValue = selectedValue;
     } else {
+      // Handle single selection case
       this.dropdownModelValue = this.control?.value;
     }
   };
