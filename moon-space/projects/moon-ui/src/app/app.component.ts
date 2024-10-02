@@ -48,7 +48,6 @@ export class AppComponent {
       ];
     }, 2000);
     this.form.valueChanges.subscribe(() => {
-      console.log(this.form.value)
     });
   }
 }

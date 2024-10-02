@@ -1,6 +1,4 @@
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   effect,
   ElementRef,
@@ -45,10 +43,8 @@ export class DropdownComponent {
 
   constructor(
     private controlContainer: ControlContainer,
-    private cdr: ChangeDetectorRef
   ) {
     effect(() => {
-      console.log('Signal changed:', this.options());
       this.setControlDefaultValue();
       this.setSelectedValue();
     });
@@ -129,7 +125,6 @@ export class DropdownComponent {
   };
   setFormControlValue = (): void => {
     this.control.setValue(this.dropdownModelValue);
-    console.log('controlvalue', this.control.value);
     this.control.updateValueAndValidity();
     if (this.options().selectionChange) {
       if (
@@ -176,7 +171,6 @@ export class DropdownComponent {
     this.setDropdownOptions(dropdownData);
   };
   setDropdownOptions = (data: TextValueOptionConfig[]): void => {
-    console.log(data);
     this.displayOptions.set(data);
     if (this.options().features?.allowMultiple) {
       this.setToggleState();
