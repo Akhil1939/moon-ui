@@ -15,12 +15,12 @@ import {
 } from '@angular/forms';
 import { TextValueOptionConfig } from '../../shared/models';
 import { distinctUntilChanged } from 'rxjs';
-import { SccDropdownModule } from './scc-dropdown.module';
+import { DropdownModule } from './dropdown.module';
 
 @Component({
   selector: 'moon-dropdown',
   standalone: true,
-  imports: [SccDropdownModule],
+  imports: [DropdownModule],
   host: { ngSkipHydration: 'true' },
   templateUrl: './dropdown.component.html',
   styleUrl: './dropdown.component.css',

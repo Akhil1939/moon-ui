@@ -1,2 +1,2 @@
-export * from './scc-button.component'
+export * from './button.component'
 export * from './models/button-options'

@@ -23,4 +23,4 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     MatChipsModule,
   ]
 })
-export class SccDropdownModule { }
+export class DropdownModule { }

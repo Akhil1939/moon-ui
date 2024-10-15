@@ -1,0 +1,11 @@
+<ng-container>
+    @if(column.isSortable){
+    <th [attr.colspan]="column.colSpan" mat-header-cell *matHeaderCellDef mat-sort-header [style]="column.getStyle?.(0)"
+    [class.text-center]="column.type === 'action'"> {{column.label}}</th>
+    } @else{
+    <th [attr.colspan]="column.colSpan" mat-header-cell *matHeaderCellDef  [style]="column.getStyle?.(0)"
+    [class.text-center]="column.type === 'action'">
+        {{column.label}}
+    </th>
+    }
+</ng-container>

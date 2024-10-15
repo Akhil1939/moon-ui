@@ -1,0 +1,20 @@
+@switch (column.type) {
+    @case ('select') {
+        <ng-container matColumnDef="select">
+            <!-- Checkbox Column -->
+            <select-column [dataSource]="dataSource" #columnReference [column]="column"></select-column>
+        </ng-container>
+    }
+    @case ('radio') {
+        <ng-container matColumnDef="radio">
+            <!-- Radio Column -->
+            <radio-column [dataSource]="dataSource" #columnReference [column]="column"></radio-column>
+        </ng-container>
+    }
+    @default {
+        <ng-container [matColumnDef]="column.property">
+            <universal-column #columnReference [column]="column">
+            </universal-column>
+        </ng-container>
+    }
+}

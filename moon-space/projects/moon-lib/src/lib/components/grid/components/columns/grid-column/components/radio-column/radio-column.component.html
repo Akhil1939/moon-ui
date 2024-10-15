@@ -1,0 +1,12 @@
+<ng-container>
+    <th mat-header-cell *matHeaderCellDef width="10">
+      <!-- This header cell will be empty for the radio button column -->
+    </th>
+    <td mat-cell *matCellDef="let row; let index = index">
+      <mat-radio-button 
+        (click)="$event.stopPropagation()" 
+        (change)="$event ? selectRow(row) : null"
+        [checked]="isSelected(row)">
+      </mat-radio-button>
+    </td>
+  </ng-container>

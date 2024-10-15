@@ -1,0 +1,23 @@
+<!-- @if(column && column.actions && column.actions.length > 0) {
+@for (action of column.actions; track action; let index = $index) {
+@if (action?.isVisible && action?.isVisible(element)) {
+@if (action.type === 'button') {
+
+<lib-button [options]="action.options"
+    (callBackFnCalled)="onCallBackFn($event, action.options, element)"></lib-button>
+
+} @else if(action.type === 'icon') {
+
+<lib-icon [options]="action.options"
+    (callBackFnCalled)="onCallBackFn($event, action.options, element)"></lib-icon>
+
+}
+@else if(action.type === 'menu') {
+
+<lib-menu [options]="action.options" [listOptions]="getMenuListOptions(element, index)"
+    (callBackFnCalled)="onCallBackFn($event, action.options, element)"></lib-menu>
+
+}
+}
+}
+} -->

@@ -1,24 +1,24 @@
 @if (options().isVisible ?? true) {
-    <button mat-button [id]="options().id" [classList]="options().classes" [color]="options().matColor"(click)="onBtnClick($event)"
-      (blur)="onBtnBlur($event)" (focus)="onBtnFocus($event)" (mouseover)="onBtnHover($event)" [disabled]="options().disabled"
-      libButtonVariant [buttonVariant]="options().buttonVariant" [matTooltip]="options().tooltipText ?? ''"
-      [matTooltipPosition]="options().tooltipPosition ?? 'below' " type="button">
-      <ng-container [ngTemplateOutlet]="icon"></ng-container>
-      {{ options().label ? options().label : '' }}
-      @if(options().badgeConfig?.text){
-      <span class="mat-static-badge">{{options().badgeConfig?.text}}</span>
-      }
-    </button>
+<button mat-button [id]="options().id" [classList]="options().classes" [color]="options().matColor"
+  (click)="onBtnClick($event)" (blur)="onBtnBlur($event)" (focus)="onBtnFocus($event)" (mouseover)="onBtnHover($event)"
+  [disabled]="options().disabled" libButtonVariant [buttonVariant]="options().buttonVariant"
+  [matTooltip]="options().tooltipText ?? ''" [matTooltipPosition]="options().tooltipPosition ?? 'below' " type="button">
+  <ng-container [ngTemplateOutlet]="icon"></ng-container>
+  {{ options().label ? options().label : '' }}
+  @if(options().badgeConfig?.text){
+  <span class="mat-static-badge">{{options().badgeConfig?.text}}</span>
   }
-  
-  <ng-template #icon>
-    @if(isImageButton){
-    <mat-icon>
-      <img [src]="options().iconUrl" [alt]="options().altText" />
-    </mat-icon>
-    }@else if(isIconButton){
-    <mat-icon>
-      {{options().matIcon}}
-    </mat-icon>
-    }
-  </ng-template>
+</button>
+}
+
+<ng-template #icon>
+  @if(isImageButton){
+  <mat-icon>
+    <img [src]="options().iconUrl" [alt]="options().altText" />
+  </mat-icon>
+  }@else if(isIconButton){
+  <mat-icon>
+    {{options().matIcon}}
+  </mat-icon>
+  }
+</ng-template>

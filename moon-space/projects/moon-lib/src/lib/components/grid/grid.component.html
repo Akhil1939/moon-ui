@@ -1,0 +1,33 @@
+<div class="data-table-block">
+
+  <div class="table-scroller">
+
+      <table [id]="options().id" [classList]="options().classes" mat-table [dataSource]="dataSource" matSort
+      (matSortChange)="announceSortChange($event)" multiTemplateDataRows>
+      @for (column of options().columns; track column; let index = $index) {
+        <grid-column #grid [column]="column" [dataSource]="dataSource">
+        </grid-column>
+      }
+      <ng-container>
+        @if(displayedColumns.length > 0){
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          }
+          @if(level1DisplayedColumns.length > 0){
+          <tr mat-header-row *matHeaderRowDef="level1DisplayedColumns; sticky: true"></tr>
+          }
+          @if(level2DisplayedColumns.length > 0){
+          <tr mat-header-row *matHeaderRowDef="level2DisplayedColumns; sticky: true"></tr>
+          }
+      </ng-container>
+      <ng-container>
+        <body-row [displayedColumns]="displayedColumns"> </body-row>
+      </ng-container>
+    </table>
+    @if(options().data && options().data.length == 0){
+      <!-- <lib-empty-state></lib-empty-state> -->
+    }
+  </div>
+  <lib-paginator [dataSource]="dataSource">
+  </lib-paginator>
+
+</div>

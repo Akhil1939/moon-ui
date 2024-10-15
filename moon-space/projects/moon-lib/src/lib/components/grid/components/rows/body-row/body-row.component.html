@@ -1,0 +1,15 @@
+<ng-container>
+        <tr [ngClass]="{'level-0-row': level1DisplayedColumns.length > 0 || level2DisplayedColumns.length > 0}" mat-row
+                *matRowDef="let row; columns: displayedColumns; let index=index"
+                [ngStyle]="options?.getRowStyle && options?.getRowStyle({data: row, rowIndex: index})"
+                [style]="options?.rowStyle"></tr>
+        @if(level1DisplayedColumns.length > 0){
+
+        <tr mat-row *matRowDef="let row; columns: level1DisplayedColumns let index=index"
+                [ngStyle]="options?.getRowStyle && options?.getRowStyle({data: row, rowIndex: index, rowLevel:1})"></tr>
+        }
+        @if(level2DisplayedColumns.length > 0){
+        <tr mat-row *matRowDef="let row; columns: level2DisplayedColumns let index=index"
+                [ngStyle]="options?.getRowStyle && options?.getRowStyle({data: row, rowIndex: index, rowLevel:2})"></tr>
+        }
+</ng-container>

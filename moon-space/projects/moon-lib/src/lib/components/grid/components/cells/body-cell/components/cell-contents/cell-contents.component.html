@@ -1,0 +1,106 @@
+<!-- @if (isVisible(element)) {
+    @if (column.type && column.type === 'serialNo') {
+        {{index + 1}}
+    } @else {
+        @if ((isCellClicked && index === cellClickOptions.rowIndex ) && cellClickOptions.isEditable) {
+            @if (column.type === "dropdown" && column.options.data) {
+             
+                    <lib-grid-dropdown [column]="column" [row]="element"
+                        [isDblClicked]="(isCellClicked && index === cellClickOptions.rowIndex ) && cellClickOptions.isEditable"
+                        (callBackFnCalled)="onCallBackFn($event, column.options, element)">
+                        
+                    </lib-grid-dropdown>
+                
+            }
+            @else if (column.type === 'autocomplete') {
+              
+                    <lib-grid-auto-complete [column]="column" [row]="element"
+                        [isDblClicked]="(isCellClicked && index === cellClickOptions.rowIndex ) && cellClickOptions.isEditable"
+                        (callBackFnCalled)="onCallBackFn($event, column.options, element)">
+                    </lib-grid-auto-complete>
+                
+            }
+            @else if (column.type === 'date') {
+               
+                    <lib-grid-date [column]="column" [row]="element"
+                        [isDblClicked]="(isCellClicked && index === cellClickOptions.rowIndex ) && cellClickOptions.isEditable"
+                        (callBackFnCalled)="onCallBackFn($event, column.options, element)">
+                    </lib-grid-date>
+                
+            }
+            @else if (column.type == 'textarea') {
+                <lib-grid-text-area [column]="column" [row]="element" [isDblClicked]="(isCellClicked && index === cellClickOptions.rowIndex ) && cellClickOptions.isEditable"
+                (callBackFnCalled)="onCallBackFn($event, column.options, element)"></lib-grid-text-area>
+            }
+            @else {
+               
+                    <lib-grid-input [column]="column" [row]="element"
+                        [isDblClicked]="(isCellClicked && index === cellClickOptions.rowIndex ) && cellClickOptions.isEditable"
+                        (callBackFnCalled)="onCallBackFn($event, column.options, element)">
+                    </lib-grid-input>
+                
+            }
+        }
+        @else {
+        <div [class.editable-label-wrap]="column.isEditable"
+            [matTooltip]="isTextOverflow(textSpan) ? element[column.property] : ''" matTooltipPosition="above"
+            #textSpan>
+            @if (column.type === "dropdown") {
+               
+                    <lib-grid-dropdown [column]="column" [row]="element"
+                        [isDblClicked]="(isCellClicked && index === cellClickOptions.rowIndex ) && cellClickOptions.isEditable"
+                        (callBackFnCalled)="onCallBackFn($event, column.options, element)">
+                    </lib-grid-dropdown>
+                
+            }
+            @else if (column.type === 'autocomplete') {
+                
+                    <lib-grid-auto-complete [column]="column" [row]="element"
+                        [isDblClicked]="(isCellClicked && index === cellClickOptions.rowIndex ) && cellClickOptions.isEditable"
+                        (callBackFnCalled)="onCallBackFn($event, column.options, element)">
+                    </lib-grid-auto-complete>
+                
+            }
+            @else if (column.type === 'date') {
+                
+                    <lib-grid-date [column]="column" [row]="element"
+                        [isDblClicked]="(isCellClicked && index === cellClickOptions.rowIndex ) && cellClickOptions.isEditable"
+                        (callBackFnCalled)="onCallBackFn($event, column.options, element)">
+                    </lib-grid-date>
+                
+            }
+            @else if (column.type == 'textarea') {
+                
+                    <lib-grid-text-area [column]="column" [row]="element" [isDblClicked]="(isCellClicked && index === cellClickOptions.rowIndex ) && cellClickOptions.isEditable"
+                    (callBackFnCalled)="onCallBackFn($event, column.options, element)"></lib-grid-text-area>
+                
+            }
+            @else if (column.type === 'number' || column.type === 'string') {
+                
+                    <lib-grid-input [column]="column" [row]="element"
+                        [isDblClicked]="(isCellClicked && index === cellClickOptions.rowIndex ) && cellClickOptions.isEditable"
+                        (callBackFnCalled)="onCallBackFn($event, column.options, element)">
+                    </lib-grid-input>
+                
+            } 
+         
+            @else {
+            <span [class.editable-label]="column.isEditable" [matTooltip]="getToolTip(element)" [classList]="column.classGetter?.(element)" >
+                @if (column.valueGetter && column.valueGetter(element)) {
+                {{column.valueGetter(element)}}
+                } @else {
+                {{ element[column.property] }}
+                }
+            </span>
+            }
+        </div>
+        }
+    }
+} -->
+<span [class.editable-label]="column.isEditable" [matTooltip]="getToolTip(element)" [classList]="column.classGetter?.(element)" >
+    @if (column.valueGetter && column.valueGetter(element)) {
+    {{column.valueGetter(element)}}
+    } @else {
+    {{ element[column.property] }}
+    }
+</span>

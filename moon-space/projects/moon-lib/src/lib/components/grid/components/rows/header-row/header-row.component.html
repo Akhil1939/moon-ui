@@ -1,0 +1,12 @@
+<ng-container>
+    @if(displayedColumns.length > 0){
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    }
+    @if(level1DisplayedColumns.length > 0){
+    <tr mat-header-row *matHeaderRowDef="level1DisplayedColumns; sticky: true"></tr>
+    }
+    @if(level2DisplayedColumns.length > 0){
+    <tr mat-header-row *matHeaderRowDef="level2DisplayedColumns; sticky: true"></tr>
+    }
+
+</ng-container>

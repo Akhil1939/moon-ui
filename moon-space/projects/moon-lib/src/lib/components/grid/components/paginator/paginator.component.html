@@ -1,0 +1,10 @@
+@if (options && options.paginatorOptions !== undefined) {
+    <mat-paginator
+      [length]="options.paginatorOptions.length"
+      [pageSize]="options.paginatorOptions.pageSize"
+      [pageSizeOptions]="options.paginatorOptions.pageSizeOptions!"
+      [pageIndex]="options.paginatorOptions.pageIndex - 1"
+      (page)="pageChanged($event);"
+      aria-label="Select page of elements"
+    ></mat-paginator>
+}

@@ -1,0 +1,28 @@
+@if (column.type === 'action') {
+<td mat-cell *matCellDef="let element" width="100" [ngClass]="{'reset-text-wrapper': true, 'text-center': true}">
+    <div class="grid-actions">
+
+        <lib-cell-action [element]="element" [cellClickOptions]="cellClickOptions" [column]="column!">
+        </lib-cell-action>
+
+    </div>
+</td>
+}@else if(column.type == 'checkbox'){
+<td mat-cell *matCellDef="let element; let index = dataIndex" class="body-cell-wrapper" [ngClass]="getClasses(element)"
+    (click)="cellClicked(element, index)" [style]="getStyle(element)">
+    <mat-checkbox [checked]="element[column.property]"
+        (change)="onCheckboxChange($event,element, index)"></mat-checkbox>
+</td>
+}
+@else {
+<form>
+    <ng-container>
+        <td [attr.colspan]="column.colSpan" mat-cell 
+            *matCellDef="let element; let index = dataIndex" [ngClass]="getClasses(element)"
+            (click)="cellClicked(element, index)" [style]="getStyle(element)">
+            <lib-cell-contents [element]="element" [column]="column" [index]="index"
+                [cellClickOptions]="cellClickOptions"></lib-cell-contents>
+        </td>
+    </ng-container>
+</form>
+}
