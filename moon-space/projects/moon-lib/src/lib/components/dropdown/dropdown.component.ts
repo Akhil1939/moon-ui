@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   effect,
   ElementRef,
@@ -24,6 +25,7 @@ import { DropdownModule } from './dropdown.module';
   host: { ngSkipHydration: 'true' },
   templateUrl: './dropdown.component.html',
   styleUrl: './dropdown.component.css',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class DropdownComponent {
   options = input.required<DropdownOptions>();
@@ -97,10 +99,10 @@ export class DropdownComponent {
         (x) => x.value == this.dropdownModelValue,
       );
       const selectedOptionDisplay = selectedOption ? selectedOption.text : '';
-      return selectedOptionDisplay
-        ? selectedOptionDisplay.replace(/,\s*$/, '')
-        : '';
+      console.log(selectedOptionDisplay, this.dropdownModelValue, selectedOption)
+      return selectedOption?.text;
     } else {
+      console.log('empty')
       return '';
     }
   };
@@ -161,11 +163,11 @@ export class DropdownComponent {
 
   filterData = (): void => {
     const search = this.dropdownSearchCtrl.value?.toLowerCase();
-    const dropdownData = search
+    const dropdownData = [...search
       ? this.options().data.filter(
           (x) => x.text.toLowerCase().indexOf(search) > -1,
         )
-      : this.options().data;
+      : this.options().data];
     this.setDropdownOptions(dropdownData);
   };
   setDropdownOptions = (data: TextValueOptionConfig[]): void => {

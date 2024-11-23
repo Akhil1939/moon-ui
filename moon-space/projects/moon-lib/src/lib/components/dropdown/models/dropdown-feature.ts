@@ -51,4 +51,5 @@ export interface DropDownFeature {
    * Maximum number of chips to display when multiple items are selected.
    */
   chipCount?: number;
+  enableVirtualization?: boolean;
 }

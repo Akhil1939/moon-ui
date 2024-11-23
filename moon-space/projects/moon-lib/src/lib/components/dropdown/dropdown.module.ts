@@ -5,6 +5,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { CdkVirtualScrollViewport, ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [],
@@ -14,6 +15,9 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     NgxMatSelectSearchModule,
     MatIconModule,
     MatChipsModule,
+    ScrollingModule,
+    CdkVirtualScrollViewport
+
   ],
   exports: [
     ReactiveFormsModule,
@@ -21,6 +25,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     NgxMatSelectSearchModule,
     MatIconModule,
     MatChipsModule,
+    ScrollingModule,
+    CdkVirtualScrollViewport
   ],
 })
 export class DropdownModule {}

@@ -15,6 +15,11 @@
         border-radius: 6px;
         background: $Neutral100;
 
+        &:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label,
+        &:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label--float-above {
+            color: var(--mdc-outlined-text-field-focus-label-text-color) !important;
+        }
+
         .mdc-floating-label {
             font-size: 14px;
             font-weight: 400;
@@ -45,6 +50,7 @@
             line-height: 20px;
             color: $Neutral800;
             font-family: $fontFamily;
+            height: 24px !important;
         }
 
         .mat-mdc-form-field-textarea-control {
@@ -86,7 +92,7 @@
         .mdc-notched-outline__leading,
         .mdc-notched-outline__notch,
         .mdc-notched-outline__trailing {
-            border-color: $Neutral400;
+            // border-color: $Neutral400;
             --mdc-outlined-text-field-focus-label-text-color: #1975B3;
         }
 
@@ -121,7 +127,17 @@
                         path {
                             display: none;
                         }
-                        //  background: url("assets/images/date-picker-grey.svg") no-repeat center center;
+
+                        //   background: url("../../assets/images/date-picker-grey.svg") no-repeat center center;
+                        background-size: 24px 24px;
+                    }
+                }
+            }
+
+            &.date-time-picker {
+                .mdc-icon-button {
+                    .mat-datepicker-toggle-default-icon {
+                        // background: url("../../assets/images/date-time-picker-grey.svg") no-repeat center center;
                         background-size: 24px 24px;
                     }
                 }
@@ -447,6 +463,339 @@ html {
     }
 }
 
+.owl-dt-popup-container {
+    width: 296px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px 0px rgba($color: $Neutral900, $alpha: 0.16);
+
+    .owl-dt-calendar {
+        height: 21.55em;
+
+        .owl-dt-calendar-control {
+            padding: 4px 8px 8px;
+            color: #44474E;
+
+            .owl-dt-calendar-control-content {
+                font-family: $fontFamily;
+                border-radius: 4px;
+                margin: 5px 0;
+                justify-content: flex-start;
+
+                .owl-dt-control-button {
+                    height: 40px;
+                    margin: 0;
+
+                    &.owl-dt-control-period-button {
+                        border-radius: 4px;
+
+                        .owl-dt-control-button-content {
+                            font-size: 16px;
+                            font-weight: 500;
+                            line-height: 20px;
+                            color: $Neutral800;
+                            text-transform: uppercase;
+                            height: inherit;
+                        }
+                    }
+                }
+
+            }
+
+            .owl-dt-control-button {
+                margin: 5px 2px;
+                border-radius: 50%;
+
+                &.owl-dt-control-arrow-button,
+                .owl-dt-control-button-arrow {
+                    svg {
+                        fill: $Neutral600;
+                    }
+                }
+
+                &:hover {
+                    background: rgba($color: $Neutral900, $alpha: 0.04);
+
+                    &.owl-dt-control-period-button {
+                        .owl-dt-control-button-content {
+                            background: inherit;
+                        }
+                    }
+                }
+
+                &:not([aria-label]) {
+                    display: none;
+                }
+
+                &[aria-label="Previous month"],
+                &[aria-label="Previous year"] {
+                    order: 1;
+                    width: 40px;
+                    height: 40px;
+                }
+
+                &[aria-label="Next month"],
+                &[aria-label="Next year"] {
+                    order: 3;
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+        }
+
+        .owl-dt-calendar-main {
+            padding: 0 8px 8px 8px;
+
+            .owl-dt-calendar-view {
+                .owl-dt-calendar-table {
+                    .owl-dt-calendar-header {
+                        color: rgba($color: $Neutral900, $alpha: 0.54);
+
+                        .owl-dt-weekdays {
+                            .owl-dt-weekday {
+                                font-size: 14px;
+                                line-height: 18px;
+                                padding-bottom: 8px;
+                            }
+                        }
+                    }
+
+                    .owl-dt-calendar-body {
+
+                        .owl-dt-calendar-cell {
+                            .owl-dt-calendar-cell-content {
+                                width: 100%;
+                                height: 100%;
+                                color: rgba($color: $Neutral900, $alpha: 0.87);
+
+                                &.owl-dt-calendar-cell-out {
+                                    opacity: 0;
+                                }
+
+                                &:hover {
+                                    background: rgba($color: $Primary400, $alpha: 0.12);
+                                    color: $Primary400;
+                                }
+
+                                &.owl-dt-calendar-cell-today {
+                                    border-color: $Primary400;
+
+                                    &:not(.owl-dt-calendar-cell-selected) {
+                                        border-color: rgba($color: $Primary400, $alpha: 0.72);
+                                    }
+                                }
+                            }
+
+                            &.owl-dt-calendar-cell-selected,
+                            &.owl-dt-calendar-cell-active {
+                                .owl-dt-calendar-cell-content {
+                                    background: $Primary400;
+                                    color: #FFFFFF;
+
+                                }
+                            }
+
+                        }
+
+
+                    }
+                }
+
+                .owl-dt-control-arrow-button {
+                    position: absolute;
+                    top: 9px;
+                    right: 54px;
+
+                    .owl-dt-control-button-content {
+                        width: 40px;
+                        height: 40px;
+
+                        svg {
+                            width: 12px;
+                            height: 12px;
+                            fill: $Neutral600;
+                        }
+                    }
+
+                    &:hover {
+                        .owl-dt-control-button-content {
+                            background: rgba($color: $Neutral900, $alpha: 0.04);
+                        }
+                    }
+
+
+                    &:last-child {
+                        right: 10px;
+                    }
+                }
+            }
+
+            .owl-dt-calendar-multi-year-view {
+                .owl-dt-control-arrow-button {
+                    position: absolute;
+                    top: 9px;
+                    right: 54px;
+
+                    .owl-dt-control-button-content {
+                        width: 40px;
+                        height: 40px;
+
+                        svg {
+                            width: 12px;
+                            height: 12px;
+                            fill: $Neutral600;
+                        }
+                    }
+
+                    &:hover {
+                        .owl-dt-control-button-content {
+                            background: rgba($color: $Neutral900, $alpha: 0.04);
+                        }
+                    }
+
+
+                    &:last-child {
+                        right: 10px;
+                    }
+                }
+
+                .owl-dt-calendar-multi-year-table {
+                    width: 100%;
+
+                    .owl-dt-calendar-header {
+                        th {
+                            position: relative;
+                            font-size: 14px;
+                            line-height: 18px;
+                            font-weight: 500;
+                            padding-bottom: 12px;
+                            color: $Neutral800;
+
+                            &::before {
+                                content: "";
+                                position: absolute;
+                                left: -8px;
+                                right: -8px;
+                                bottom: 0;
+                                height: 1px;
+                                background: rgba($color: $Neutral900, $alpha: 0.12);
+                            }
+                        }
+                    }
+
+                    .owl-dt-calendar-body {
+                        .owl-dt-calendar-cell {
+                            width: 0 !important;
+                            padding-top: 6.14286% !important;
+                            padding-bottom: 6.14286% !important;
+
+                            .owl-dt-calendar-cell-content {
+                                left: 0;
+                                right: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .owl-dt-calendar-view {
+                .owl-dt-calendar-year-table {
+                    .owl-dt-calendar-body {
+                        .owl-dt-calendar-cell {
+                            width: 20px !important;
+                            padding-top: 0 !important;
+                            padding-bottom: 0 !important;
+
+                            .owl-dt-calendar-cell-content {
+                                left: 0;
+                                right: 0;
+                                // height: 40px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .owl-dt-timer {
+        .owl-dt-timer-box {
+            .owl-dt-timer-content {
+                .owl-dt-timer-input {
+                    font-size: 18px;
+                    line-height: 24px;
+                    font-family: $fontFamily;
+                    color: $Primary400;
+                    background: transparent;
+                    border-radius: 4px;
+                    min-width: 44px;
+                    border-color: rgba($color: $Neutral900, $alpha: 0.16);
+
+                    &:hover,
+                    &:focus {
+                        border-color: rgba($color: $Neutral900, $alpha: 0.72);
+                    }
+                }
+            }
+
+            .owl-dt-control-button {
+                &:hover {
+                    .owl-dt-control-button-content {
+                        background: rgba($color: $Neutral900, $alpha: 0.04);
+                    }
+                }
+            }
+
+            .owl-dt-control-arrow-button {
+                svg {
+                    fill: $Neutral600;
+                }
+            }
+        }
+
+        .owl-dt-timer-divider:after {
+            width: 4px;
+            height: 4px;
+            bottom: 40%;
+            background: rgba($color: $Neutral900, $alpha: 0.32);
+        }
+
+        .owl-dt-timer-divider:before {
+            width: 4px;
+            height: 4px;
+            top: 40%;
+            background: rgba($color: $Neutral900, $alpha: 0.32);
+        }
+
+        .owl-dt-timer-hour12 {
+            color: $Primary400;
+
+            .owl-dt-timer-hour12-box {
+                font-family: $fontFamily;
+                font-weight: 500;
+                border-color: $Primary400;
+                border-radius: 5px;
+                min-width: 44px;
+                overflow: hidden;
+
+                &:hover {
+                    .owl-dt-control-button-content {
+                        background-color: $Primary400;
+                        color: #FFFFFF;
+                    }
+                }
+            }
+
+        }
+    }
+
+    .owl-dt-container-buttons {
+        height: 40px;
+        color: $Neutral700;
+        font-family: $fontFamily;
+    }
+}
+
+
 // Mat Icon
 .mat-icon {
     img {
@@ -658,7 +1007,7 @@ html {
 }
 
 // Mat Checkbox
- .mat-mdc-checkbox {
+.mat-mdc-checkbox {
     margin-left: -9px;
     --mdc-checkbox-state-layer-size: 36px;
 
@@ -879,10 +1228,11 @@ html {
                         }
                     }
 
-                    .dialog-close.mat-mdc-icon-button {
-                        margin: -6px;
+                    .dialog-close.mat-icon {
                         flex-shrink: 0;
-                        padding: 6px !important;
+                        cursor: pointer;
+                        // margin: -6px;
+                        // padding: 6px !important;
 
                         .mat-icon {
                             width: 20px;
@@ -1519,9 +1869,11 @@ ngx-material-timepicker-container {
                     }
                 }
             }
+
             .mat-mdc-cell:not(:last-child):before {
                 text-wrap: wrap;
             }
+
             .mat-mdc-cell:last-child::before {
                 text-align: center;
             }
@@ -2211,7 +2563,7 @@ ngx-material-timepicker-container {
     background-color: rgba($color: $Primary600, $alpha: 0.25) !important;
 }
 
- .inner-table {
+.inner-table {
     thead {
         .mat-mdc-header-row {
             .mdc-data-table__header-cell {

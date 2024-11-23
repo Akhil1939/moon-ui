@@ -78,9 +78,9 @@
       <mat-select [formControlName]="options().formControlName">
         @if (options().data.length > 0) {
           <mat-select-trigger class="custom-mat-select-trigger">
-            <span>{{ getSelectedOptionForDisplay() }}</span>
+            <span [innerText]="getSelectedOptionForDisplay()"></span>
             @if (options().features?.allowClear) {
-              <span class="clear-input" (click)="clear()" matSuffix>clear</span>
+              <mat-icon class="clear-input" (click)="clear()" matSuffix>clear</mat-icon>
             }
           </mat-select-trigger>
         }
@@ -96,15 +96,24 @@
             ></ngx-mat-select-search>
           </mat-option>
         }
-        @for (
-          item of displayOptions().length > 0
+        @if(options().features?.enableVirtualization){
+          <cdk-virtual-scroll-viewport itemSize="30" class="example-viewport" [minBufferPx]="300">
+            <mat-option *cdkVirtualFor="let item of displayOptions().length > 0
+              ? displayOptions()
+              : options().data;" class="example-item" [value]="item.value">{{ item.text }}</mat-option>
+          </cdk-virtual-scroll-viewport>
+        }@else {
+
+          @for (
+            item of displayOptions().length > 0
             ? displayOptions()
             : options().data;
-          track item
-        ) {
-          <mat-option [value]="item.value">{{ item.text }}</mat-option>
+            track item
+          ) {
+            <mat-option [value]="item.value">{{ item.text }}</mat-option>
+          }
         }
-      </mat-select>
-    }
+        </mat-select>
+      }
   </mat-form-field>
 </form>

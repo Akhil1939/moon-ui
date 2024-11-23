@@ -1,0 +1,11 @@
+ .custom-mat-select-trigger{
+    display: flex;
+    justify-content: space-between;
+ }
+ .example-viewport {
+   height: 300px;
+ }
+ 
+ .example-item {
+   height: 30px;
+ }
