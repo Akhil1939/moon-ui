@@ -15,12 +15,12 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     MatIconModule,
     MatChipsModule,
   ],
-  exports:[
+  exports: [
     ReactiveFormsModule,
     MatSelectModule,
     NgxMatSelectSearchModule,
     MatIconModule,
     MatChipsModule,
-  ]
+  ],
 })
-export class DropdownModule { }
+export class DropdownModule {}

@@ -33,7 +33,7 @@ type ColumnTypes =
   | 'autocomplete'
   | 'expand'
   | 'radio'
-  | 'date' 
+  | 'date'
   | 'textarea';
 /**
  * @description Basic defination of the column
@@ -59,11 +59,11 @@ export interface BaseColumnOptions<T = any, D = any> {
   /*
   classes for cells of that column
   */
-  classes?:string[];
+  classes?: string[];
   /*
    * @description To show action icons instead of value
    */
-  
+
   actions?: ActionOptions<D>[];
   /**
    * @description To show list inside cell as per options, type
@@ -80,7 +80,7 @@ export interface BaseColumnOptions<T = any, D = any> {
   /*
   width for that column
   */
-  width?:string;
+  width?: string;
   /**
    * @description To set value of column by conditionally
    * @param row
@@ -114,54 +114,54 @@ export interface BaseColumnOptions<T = any, D = any> {
    */
   click?: (row: T) => void;
 
-   /**
+  /**
    * @description get list of class for cell
    * @param row
    * @returns array of string
    */
-  classGetter?(row:T):string[]
+  classGetter?(row: T): string[];
 
   /**
-  * @description get list of style for cell
-  * @param row
-  * @returns array of string
-  */
-  getStyle?(row: T): object
+   * @description get list of style for cell
+   * @param row
+   * @returns array of string
+   */
+  getStyle?(row: T): object;
 
-   /**
+  /**
    * @description tooltip for cell
    */
-  toolTipText?:string;
-     /**
+  toolTipText?: string;
+  /**
    * @description get tooltip text using function
    * @param row
    * @returns string
    */
-  toolTipGetter?(row:T):string;
-   /**
+  toolTipGetter?(row: T): string;
+  /**
    * @description for select column export the selected rows (select column)
    * @param rows
-   * @returns 
+   * @returns
    */
-  selectionChange?(rows:any):void;
+  selectionChange?(rows: any): void;
   /**
    * ColSpan for column
    */
-  colSpan?:number;
+  colSpan?: number;
   /**
    * In which level of row this column is appear
    */
-  level?:0|1|2|3;
+  level?: 0 | 1 | 2 | 3;
   /**
    * @description callback function for check if row is selected (select column)
-   * @param row 
+   * @param row
    */
-  isSelected?(row:any):boolean;
+  isSelected?(row: any): boolean;
   /**
    * @description callback function for check if row is selected (checkbox column)
    * @param row
    */
-  onCheckChange?(event:MatCheckboxChange, element:any, index:number):void;
+  onCheckChange?(event: MatCheckboxChange, element: any, index: number): void;
 }
 
 /**
@@ -180,12 +180,12 @@ export interface ActionOptions<D = any, O = any> {
    * @remarks we can provide either mat icon or a image path
    * @type ButtonOptions | IconOptions | MenuOptions
    */
-  options: O ;
+  options: O;
   /**
    * @description Click event on action
    * @returns void
    */
-  click?: (event:any) => void;
+  click?: (event: any) => void;
   /**
    * @description Click event on action
    * @returns void

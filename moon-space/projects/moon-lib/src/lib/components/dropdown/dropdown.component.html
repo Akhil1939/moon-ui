@@ -1,69 +1,110 @@
 <form [formGroup]="formGroup">
-    <mat-form-field [classList]="options().classes ?? '' " [appearance]="options().appearance ??'outline'"
-        subscriptSizing="dynamic">
-        @if(options().isFloatLabel){
-        <mat-label>{{options().label}}</mat-label>
+  <mat-form-field
+    [classList]="options().classes ?? ''"
+    [appearance]="options().appearance ?? 'outline'"
+    subscriptSizing="dynamic"
+  >
+    @if (options().isFloatLabel) {
+      <mat-label>{{ options().label }}</mat-label>
+    }
+    @if (options().features?.allowMultiple) {
+      <mat-select
+        [formControlName]="options().formControlName"
+        [multiple]="true"
+      >
+        @if (options().features?.showSelectedCount) {
+          <mat-select-trigger
+            class="custom-mat-select-trigger"
+            [className]="selectedItemClass"
+          >
+            @if (
+              selectedItemsCount <= selectedItemsToDisplay && dropdownModelValue
+            ) {
+              <mat-chip-set>
+                <ng-container>
+                  @for (option of selectedChips; track option) {
+                    <mat-chip
+                      [removable]="true"
+                      (removed)="removeOption(option)"
+                    >
+                      {{ getMultiSelectedOptionForDisplay(option) }}
+                      <mat-icon class="item-remove" matChipRemove
+                        >cancel</mat-icon
+                      >
+                    </mat-chip>
+                  }
+                </ng-container>
+              </mat-chip-set>
+            }
+            @if (selectedItemsCount > selectedItemsToDisplay) {
+              <span> {{ selectedItemsCount }} Items Selected </span>
+            }
+            @if (
+              options().features?.allowClear &&
+              selectedItemsCount > selectedItemsToDisplay
+            ) {
+              <span class="clear-input" (click)="clear()" matSuffix>clear</span>
+            }
+          </mat-select-trigger>
         }
-        @if(options().features?.allowMultiple){ <mat-select [formControlName]="options().formControlName"
-            [multiple]="true">
-            @if(options().features?.showSelectedCount){
-            <mat-select-trigger class="custom-mat-select-trigger" [className]="selectedItemClass">
-                @if(selectedItemsCount <= selectedItemsToDisplay && dropdownModelValue){ <mat-chip-set>
-                    <ng-container>
-                        @for(option of selectedChips; track option){
-                        <mat-chip [removable]="true" (removed)="removeOption(option)">
-                            {{ getMultiSelectedOptionForDisplay(option) }}
-                            <mat-icon class="item-remove" matChipRemove>cancel</mat-icon>
-                        </mat-chip>
-                        }
-                    </ng-container>
-                    </mat-chip-set>
-                    }
-                    @if(selectedItemsCount > selectedItemsToDisplay){
-                    <span>
-                        {{ selectedItemsCount }} Items Selected
-                    </span>
-                    }
-                    @if(options().features?.allowClear && (selectedItemsCount > selectedItemsToDisplay)){
-                    <span class="clear-input" (click)="clear()" matSuffix>clear</span>
-                    }
-            </mat-select-trigger>
-            }
-            @if(this.options().features?.allowSearching){
-                <mat-option>
-                    <ngx-mat-select-search [formControl]="dropdownSearchCtrl" [placeholderLabel]="'Search....'"
-                        [noEntriesFoundLabel]="'No record ...'" [hideClearSearchButton]="options().features?.hideClearSearchButton ?? false"
-                        [showToggleAllCheckbox]="this.options().features?.showToggleAllCheckbox ?? false" [toggleAllCheckboxChecked]="isChecked"
-                        [toggleAllCheckboxIndeterminate]="isIndeterminate"
-                        (toggleAll)="toggleSelectAll($event)"></ngx-mat-select-search>
-                </mat-option>
-                }
-            @for (item of displayOptions().length > 0 ? displayOptions() : options().data; track item) {
-            <mat-option [value]="item.value">{{item.text}}</mat-option>
-            }
-        </mat-select>
-        }@else {
-        <mat-select [formControlName]="options().formControlName">
-            @if(options().data.length > 0){
-                <mat-select-trigger class="custom-mat-select-trigger">
-                    <span>{{getSelectedOptionForDisplay()}}</span>
-                    @if(options().features?.allowClear){
-                        <span class="clear-input" (click)="clear()" matSuffix>clear</span>
-                    }
-                </mat-select-trigger>
-            }
-            @if(options().features?.allowSearching){
-            <mat-option>
-                <ngx-mat-select-search [formControl]="dropdownSearchCtrl" [placeholderLabel]="'Search....'"
-                    [noEntriesFoundLabel]="'No record ...'"
-                    [hideClearSearchButton]="options().features?.hideClearSearchButton ?? false"></ngx-mat-select-search>
-            </mat-option>
-            }
-            @for(item of displayOptions().length > 0 ? displayOptions() : options().data; track item){
-            <mat-option [value]="item.value">{{item.text}}</mat-option>
-            }
-
-        </mat-select>
+        @if (this.options().features?.allowSearching) {
+          <mat-option>
+            <ngx-mat-select-search
+              [formControl]="dropdownSearchCtrl"
+              [placeholderLabel]="'Search....'"
+              [noEntriesFoundLabel]="'No record ...'"
+              [hideClearSearchButton]="
+                options().features?.hideClearSearchButton ?? false
+              "
+              [showToggleAllCheckbox]="
+                this.options().features?.showToggleAllCheckbox ?? false
+              "
+              [toggleAllCheckboxChecked]="isChecked"
+              [toggleAllCheckboxIndeterminate]="isIndeterminate"
+              (toggleAll)="toggleSelectAll($event)"
+            ></ngx-mat-select-search>
+          </mat-option>
         }
-    </mat-form-field>
+        @for (
+          item of displayOptions().length > 0
+            ? displayOptions()
+            : options().data;
+          track item
+        ) {
+          <mat-option [value]="item.value">{{ item.text }}</mat-option>
+        }
+      </mat-select>
+    } @else {
+      <mat-select [formControlName]="options().formControlName">
+        @if (options().data.length > 0) {
+          <mat-select-trigger class="custom-mat-select-trigger">
+            <span>{{ getSelectedOptionForDisplay() }}</span>
+            @if (options().features?.allowClear) {
+              <span class="clear-input" (click)="clear()" matSuffix>clear</span>
+            }
+          </mat-select-trigger>
+        }
+        @if (options().features?.allowSearching) {
+          <mat-option>
+            <ngx-mat-select-search
+              [formControl]="dropdownSearchCtrl"
+              [placeholderLabel]="'Search....'"
+              [noEntriesFoundLabel]="'No record ...'"
+              [hideClearSearchButton]="
+                options().features?.hideClearSearchButton ?? false
+              "
+            ></ngx-mat-select-search>
+          </mat-option>
+        }
+        @for (
+          item of displayOptions().length > 0
+            ? displayOptions()
+            : options().data;
+          track item
+        ) {
+          <mat-option [value]="item.value">{{ item.text }}</mat-option>
+        }
+      </mat-select>
+    }
+  </mat-form-field>
 </form>

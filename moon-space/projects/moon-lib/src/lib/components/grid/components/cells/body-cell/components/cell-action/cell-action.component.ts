@@ -7,27 +7,20 @@ import { CallBackFnOptions } from '../../../../../../../shared/models';
 @Component({
   selector: 'lib-cell-action',
   standalone: true,
-  imports: [
-
-  ],
+  imports: [],
   templateUrl: './cell-action.component.html',
   styleUrl: './cell-action.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CellActionComponent {
-  @Input() cellClickOptions!: CellClickOptions
-  @Input() element!: any
-  @Input() column: BaseColumnOptions<any> | undefined
-  constructor(private gridService: GridService){}
-  onCallBackFn(
-    event: CallBackFnOptions,
-    options: any,
-    data?: any,
-  ) {
+  @Input() cellClickOptions!: CellClickOptions;
+  @Input() element!: any;
+  @Input() column: BaseColumnOptions<any> | undefined;
+  constructor(private gridService: GridService) {}
+  onCallBackFn(event: CallBackFnOptions, options: any, data?: any) {
     this.gridService.onCallBackFn(event, options, data, this.cellClickOptions);
   }
   getMenuListOptions(element: any, index: number) {
     return this.column?.actions?.at(index)?.options.optionsGetter?.(element);
   }
-  
 }

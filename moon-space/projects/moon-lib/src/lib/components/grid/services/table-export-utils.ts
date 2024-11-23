@@ -4,7 +4,7 @@ export class TableExportUtil {
   static exportTableToExcel(
     tableId: string,
     name: string,
-    excludeColumns: string[] = []
+    excludeColumns: string[] = [],
   ) {
     let { sheetName, fileName } = this.getFileName(name);
     let targetTableElm = document.getElementById(tableId)!;
@@ -24,38 +24,38 @@ export class TableExportUtil {
     arr: any[],
     name: string,
     selectedColumns: string[] = [],
-    headers: { [key: string]: string } = {}
+    headers: { [key: string]: string } = {},
   ) {
     let { sheetName, fileName } = this.getFileName(name);
-  
+
     // Select only the specified columns and maintain the order
-    let selectedData = arr.map(item => {
-      let newItem :{ [key: string]: any } = {};
-      selectedColumns.forEach(col => {
+    let selectedData = arr.map((item) => {
+      let newItem: { [key: string]: any } = {};
+      selectedColumns.forEach((col) => {
         newItem[headers[col] || col] = item[col]; // Use custom header if provided, otherwise use original column name
       });
       return newItem;
     });
-  
+
     var wb = XLSX.utils.book_new();
     var ws = XLSX.utils.json_to_sheet(selectedData);
-    
+
     // If headers are provided, add them as the first row
     if (Object.keys(headers).length > 0) {
-      let headerRow:{ [key: string]: any }= {};
-      selectedColumns.forEach(col => {
+      let headerRow: { [key: string]: any } = {};
+      selectedColumns.forEach((col) => {
         headerRow[headers[col] || col] = headers[col] || col;
       });
       let finalData = [headerRow, ...selectedData];
       ws = XLSX.utils.json_to_sheet(finalData, { skipHeader: true });
     }
-  
+
     XLSX.utils.book_append_sheet(wb, ws, sheetName);
     XLSX.writeFile(wb, `${fileName}.xlsx`);
   }
 
   private static tableToArrayOfObjects(
-    table: HTMLElement
+    table: HTMLElement,
   ): { [key: string]: string }[] {
     let data: { [key: string]: string }[] = [];
     let rows = table.getElementsByTagName('tr');

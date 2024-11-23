@@ -1,5 +1,21 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, NgZone, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { MatHeaderRow, MatHeaderRowDef, MatTable } from '@angular/material/table';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
+import {
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatTable,
+} from '@angular/material/table';
 import { GridService } from '../../../services';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { Subject } from 'rxjs/internal/Subject';
@@ -10,22 +26,24 @@ import { Subject } from 'rxjs/internal/Subject';
   imports: [MatHeaderRow, MatHeaderRowDef],
   templateUrl: './header-row.component.html',
   styleUrl: './header-row.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderRowComponent implements AfterViewInit, OnDestroy {
-   @Input() displayedColumns= [] as string[];
-   @Input() level1DisplayedColumns= [] as string[];
-   @Input() level2DisplayedColumns= [] as string[];
+  @Input() displayedColumns = [] as string[];
+  @Input() level1DisplayedColumns = [] as string[];
+  @Input() level2DisplayedColumns = [] as string[];
   @ViewChildren(MatHeaderRowDef) matHeaderRowDef!: QueryList<MatHeaderRowDef>;
   #destroy$ = new Subject();
-  constructor(private matTable: MatTable<any>,
+  constructor(
+    private matTable: MatTable<any>,
     private gridService: GridService,
-    public cdr:ChangeDetectorRef, private ngZone: NgZone
+    public cdr: ChangeDetectorRef,
+    private ngZone: NgZone,
   ) {}
   ngAfterViewInit(): void {
-    if(this.matTable && this.matHeaderRowDef) {
+    if (this.matTable && this.matHeaderRowDef) {
       this.matHeaderRowDef.forEach((item) => {
-        if(item) {
+        if (item) {
           this.matTable.addHeaderRowDef(item);
         }
       });
@@ -35,5 +53,4 @@ export class HeaderRowComponent implements AfterViewInit, OnDestroy {
     this.#destroy$.next(null);
     this.#destroy$.complete();
   }
-
 }

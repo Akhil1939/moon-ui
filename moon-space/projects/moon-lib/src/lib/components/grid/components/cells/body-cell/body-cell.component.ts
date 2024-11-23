@@ -7,7 +7,10 @@ import { Subject } from 'rxjs';
 import { CellContentsComponent } from './components/cell-contents/cell-contents.component';
 import { CellClickOptions } from '../../../models/cell';
 import { CellActionComponent } from './components/cell-action/cell-action.component';
-import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
+import {
+  MatCheckboxChange,
+  MatCheckboxModule,
+} from '@angular/material/checkbox';
 @Component({
   selector: 'body-cell',
   standalone: true,
@@ -17,7 +20,7 @@ import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox
     CommonModule,
     CellContentsComponent,
     CellActionComponent,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   templateUrl: './body-cell.component.html',
   styleUrl: './body-cell.component.scss',
@@ -30,10 +33,8 @@ export class BodyCellComponent implements OnInit, OnDestroy {
     rowIndex: 0,
     isCellClicked: false,
     isEditable: false,
-  }
-  constructor(
-    private gridService: GridService,
-  ) {}
+  };
+  constructor(private gridService: GridService) {}
 
   ngOnInit(): void {
     this.#setColumnActions();
@@ -44,9 +45,14 @@ export class BodyCellComponent implements OnInit, OnDestroy {
   }
 
   cellClicked(element: any, rowIndex: number) {
-    this.gridService.cellClicked(element, rowIndex, this.column, this.cellClickOptions);
+    this.gridService.cellClicked(
+      element,
+      rowIndex,
+      this.column,
+      this.cellClickOptions,
+    );
   }
-  
+
   #setColumnActions() {
     if (this.column?.actions?.length! > 0) {
       this.column.actions?.forEach((action) => {
@@ -59,12 +65,12 @@ export class BodyCellComponent implements OnInit, OnDestroy {
   getClasses(element: any): string[] {
     return this.column?.classGetter?.(element) ?? [];
   }
-  
-  getStyle(element: any): object{
+
+  getStyle(element: any): object {
     return this.column?.getStyle?.(element) ?? {};
   }
 
-  onCheckboxChange(event:MatCheckboxChange, element:any, index:number){
-    this.column.onCheckChange?.(event, element, index)
+  onCheckboxChange(event: MatCheckboxChange, element: any, index: number) {
+    this.column.onCheckChange?.(event, element, index);
   }
 }

@@ -9,7 +9,13 @@ import { MatIcon } from '@angular/material/icon';
 @Component({
   selector: 'moon-button',
   standalone: true,
-  imports: [MatButton, ButtonVariantDirective, MatTooltipModule, NgTemplateOutlet, MatIcon],
+  imports: [
+    MatButton,
+    ButtonVariantDirective,
+    MatTooltipModule,
+    NgTemplateOutlet,
+    MatIcon,
+  ],
   templateUrl: './button.component.html',
   styleUrl: './button.component.css',
 })

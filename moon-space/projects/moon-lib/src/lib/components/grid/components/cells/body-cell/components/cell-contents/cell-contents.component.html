@@ -97,28 +97,46 @@
         }
     }
 } -->
-@if(column.type == 'string'){
-    <form>
-        <mat-form-field class="example-full-width" appearance="outline">
-            <input matInput placeholder="Ex. Pizza"
-            [value]='column.valueGetter ? column.valueGetter(element) : element[column.property]' (change)="onChange($event)">
-        </mat-form-field>
-    </form>
-}
-@else if(column.type == 'date'){
-    <mat-form-field appearance="outline">
-        <input matInput [matDatepicker]="picker" [value]='column.valueGetter ? column.valueGetter(element) : element[column.property]' (dateChange)="onChange($event)">
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-}
-@else {
-<span [class.editable-label]="column.isEditable" [matTooltip]="getToolTip(element)"
-    [classList]="column.classGetter?.(element)">
+@if (column.type == "string") {
+  <form>
+    <mat-form-field class="example-full-width" appearance="outline">
+      <input
+        matInput
+        placeholder="Ex. Pizza"
+        [value]="
+          column.valueGetter
+            ? column.valueGetter(element)
+            : element[column.property]
+        "
+        (change)="onChange($event)"
+      />
+    </mat-form-field>
+  </form>
+} @else if (column.type == "date") {
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      [matDatepicker]="picker"
+      [value]="
+        column.valueGetter
+          ? column.valueGetter(element)
+          : element[column.property]
+      "
+      (dateChange)="onChange($event)"
+    />
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+} @else {
+  <span
+    [class.editable-label]="column.isEditable"
+    [matTooltip]="getToolTip(element)"
+    [classList]="column.classGetter?.(element)"
+  >
     @if (column.valueGetter && column.valueGetter(element)) {
-    {{column.valueGetter(element)}}
+      {{ column.valueGetter(element) }}
     } @else {
-    {{ element[column.property] }}
+      {{ element[column.property] }}
     }
-</span>
+  </span>
 }

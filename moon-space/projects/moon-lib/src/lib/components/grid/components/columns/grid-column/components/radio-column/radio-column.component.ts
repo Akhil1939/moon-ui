@@ -1,7 +1,13 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, Input, ViewChild } from '@angular/core';
 import { MatRadioButton } from '@angular/material/radio';
-import { MatTableDataSource, MatHeaderCellDef, MatCellDef, MatHeaderCell, MatCell } from '@angular/material/table';
+import {
+  MatTableDataSource,
+  MatHeaderCellDef,
+  MatCellDef,
+  MatHeaderCell,
+  MatCell,
+} from '@angular/material/table';
 import { BaseColumnOptions } from '../../../../../models';
 import { Subject, takeUntil } from 'rxjs';
 import { GridService } from '../../../../../services';
@@ -9,9 +15,15 @@ import { GridService } from '../../../../../services';
 @Component({
   selector: 'radio-column',
   standalone: true,
-  imports: [MatRadioButton, MatHeaderCell, MatCell, MatHeaderCellDef, MatCellDef],
+  imports: [
+    MatRadioButton,
+    MatHeaderCell,
+    MatCell,
+    MatHeaderCellDef,
+    MatCellDef,
+  ],
   templateUrl: './radio-column.component.html',
-  styleUrl: './radio-column.component.scss'
+  styleUrl: './radio-column.component.scss',
 })
 export class RadioColumnComponent {
   @Input() column!: BaseColumnOptions;
@@ -21,7 +33,7 @@ export class RadioColumnComponent {
   selectedRow: any = null;
   destroy$: Subject<any> = new Subject<any>();
 
-  constructor(private gridService: GridService) { }
+  constructor(private gridService: GridService) {}
 
   ngOnInit(): void {
     this.initialize();
@@ -41,13 +53,17 @@ export class RadioColumnComponent {
   }
 
   /** Checks if the given row is selected */
-  isSelected(row: any) { //TODO if required
+  isSelected(row: any) {
+    //TODO if required
     return this.selectedRow === row;
   }
 
   initialize() {
-    this.gridService.getDataSource().pipe(takeUntil(this.destroy$)).subscribe((data) => {
-      this.selectedRow = null;
-    });
+    this.gridService
+      .getDataSource()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.selectedRow = null;
+      });
   }
 }

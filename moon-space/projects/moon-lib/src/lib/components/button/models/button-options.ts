@@ -118,10 +118,10 @@ export interface ButtonOptions extends ComponentBaseOptions {
    */
   isCallbackFnOverride?: boolean;
   /**
-     * To visible (hide/show) button
-     * @param data 
-     * @returns boolean
-     */
+   * To visible (hide/show) button
+   * @param data
+   * @returns boolean
+   */
   isVisible?: boolean | undefined;
   /**
    * Callback function to be executed when the button is clicked.

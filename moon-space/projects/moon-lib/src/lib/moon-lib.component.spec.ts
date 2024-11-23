@@ -8,9 +8,8 @@ describe('MoonLibComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MoonLibComponent]
-    })
-    .compileComponents();
+      imports: [MoonLibComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MoonLibComponent);
     component = fixture.componentInstance;

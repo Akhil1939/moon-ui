@@ -41,32 +41,32 @@ export interface CommonGridOptions<D = any> {
   /**
    * @description Callback version of property rowStyle to set style for each row individually. Function should return an object of CSS values or undefined for no styles
    * @param params RowClassParameters<D>
-   * @returns 
+   * @returns
    */
   getRowStyle?: (params: RowClassParameters<D>) => RowStyle | undefined;
-   /**
- * @description Handles the change in sort order for the table data.
- * This function is called when the sort order of the table changes.
- * 
- * @param $event - The sort event containing information about the active sort and direction.
- * @returns A new instance of `CommonMatTableDataSource<any>` with the sorted data.
- */
-sortChange?($event: Sort): void;
+  /**
+   * @description Handles the change in sort order for the table data.
+   * This function is called when the sort order of the table changes.
+   *
+   * @param $event - The sort event containing information about the active sort and direction.
+   * @returns A new instance of `CommonMatTableDataSource<any>` with the sorted data.
+   */
+  sortChange?($event: Sort): void;
 
-/**
- * @description Updates the data for a specific row in the table.
- * This function is called when there is a change in the row data that needs to be updated.
- * 
- * @param newRow - The new row data that contains the updated values.
- * @param oldRow - (Optional) The old row data before the update. Useful for comparison or rollback.
- * @param field - (Optional) The specific field in the row that was updated.
- */
-updateData?(newRow: any, oldRow?: any, field?: string): void;
+  /**
+   * @description Updates the data for a specific row in the table.
+   * This function is called when there is a change in the row data that needs to be updated.
+   *
+   * @param newRow - The new row data that contains the updated values.
+   * @param oldRow - (Optional) The old row data before the update. Useful for comparison or rollback.
+   * @param field - (Optional) The specific field in the row that was updated.
+   */
+  updateData?(newRow: any, oldRow?: any, field?: string): void;
 
-/**
- * Name of uniquely identifying the row in the table
- */
-uniqueProperty?:string
+  /**
+   * Name of uniquely identifying the row in the table
+   */
+  uniqueProperty?: string;
 }
 
 export class CommonGridOptions<D> implements CommonGridOptions<D> {
@@ -77,6 +77,6 @@ export class CommonGridOptions<D> implements CommonGridOptions<D> {
   /**
    * To use multiple row set it to true
    */
-  isMultipleRow?: boolean; 
-  selected?:any[]=[];
+  isMultipleRow?: boolean;
+  selected?: any[] = [];
 }

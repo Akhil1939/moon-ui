@@ -1,7 +1,6 @@
-import { BehaviorSubject } from "rxjs";
-import { FormBaseOptions, TextValueOptionConfig } from "../../../shared/models";
-import { DropDownFeature } from "./dropdown-feature";
-
+import { BehaviorSubject } from 'rxjs';
+import { FormBaseOptions, TextValueOptionConfig } from '../../../shared/models';
+import { DropDownFeature } from './dropdown-feature';
 
 /**
  * Configuration for a dropdown/select component.
@@ -17,9 +16,9 @@ export interface DropdownOptions extends FormBaseOptions {
    */
   features?: DropDownFeature;
   /**
-  * Flag for overriding callback functions.
+   * Flag for overriding callback functions.
    */
-  isOverrideCallbacks?:boolean;
+  isOverrideCallbacks?: boolean;
   /**
    * @description To bind value from the option selection.
    * @default bind by value
@@ -36,6 +35,5 @@ export interface DropdownOptions extends FormBaseOptions {
   /**
    * subject to be called when the data change for option.
    */
-  changeOptions$?: BehaviorSubject<TextValueOptionConfig[]> | undefined
+  changeOptions$?: BehaviorSubject<TextValueOptionConfig[]> | undefined;
 }
-

@@ -6,13 +6,14 @@ import { BaseColumnOptions } from '../../../../../models';
 @Component({
   selector: 'universal-column',
   standalone: true,
-  imports: [BodyCellComponent,HeaderCellComponent],
+  imports: [BodyCellComponent, HeaderCellComponent],
   templateUrl: './universal-column.component.html',
-  styleUrl: './universal-column.component.scss'
+  styleUrl: './universal-column.component.scss',
 })
 export class UniversalColumnComponent {
   @Input() column!: BaseColumnOptions;
-  @ViewChild("sccHeaderCell", {static: false}) sccHeaderCell!: HeaderCellComponent;
-  @ViewChild("sccBodyCell", {static: false}) sccBodyCell!: BodyCellComponent;
-  constructor(){}
+  @ViewChild('sccHeaderCell', { static: false })
+  sccHeaderCell!: HeaderCellComponent;
+  @ViewChild('sccBodyCell', { static: false }) sccBodyCell!: BodyCellComponent;
+  constructor() {}
 }

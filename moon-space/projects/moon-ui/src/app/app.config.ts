@@ -6,5 +6,10 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(), provideAnimations()]
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideClientHydration(),
+    provideAnimations(),
+  ],
 };

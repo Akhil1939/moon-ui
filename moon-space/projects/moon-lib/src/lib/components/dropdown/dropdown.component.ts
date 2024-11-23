@@ -41,9 +41,7 @@ export class DropdownComponent {
   allOptions!: (number | string)[];
   @ViewChild('matOption') matOption!: ElementRef;
 
-  constructor(
-    private controlContainer: ControlContainer,
-  ) {
+  constructor(private controlContainer: ControlContainer) {
     effect(() => {
       this.setControlDefaultValue();
       this.setSelectedValue();
@@ -96,7 +94,7 @@ export class DropdownComponent {
   getSelectedOptionForDisplay = () => {
     if (this.options().data.length > 0) {
       const selectedOption = this.options().data?.find(
-        (x) => x.value == this.dropdownModelValue
+        (x) => x.value == this.dropdownModelValue,
       );
       const selectedOptionDisplay = selectedOption ? selectedOption.text : '';
       return selectedOptionDisplay
@@ -134,7 +132,7 @@ export class DropdownComponent {
         const selectedOptions: TextValueOptionConfig[] = [];
         Array.from(this.dropdownModelValue).forEach((item) => {
           const opt = this.displayOptions().find(
-            (element) => element.value == item
+            (element) => element.value == item,
           );
           if (opt) selectedOptions.push(opt);
         });
@@ -148,7 +146,7 @@ export class DropdownComponent {
       } else {
         const selectedOption: TextValueOptionConfig =
           this.displayOptions()?.find(
-            (x) => x.value == this.dropdownModelValue
+            (x) => x.value == this.dropdownModelValue,
           )!;
         if (this.options().isOverrideCallbacks) {
           // this.callBackFnCalled.emit({
@@ -165,7 +163,7 @@ export class DropdownComponent {
     const search = this.dropdownSearchCtrl.value?.toLowerCase();
     const dropdownData = search
       ? this.options().data.filter(
-          (x) => x.text.toLowerCase().indexOf(search) > -1
+          (x) => x.text.toLowerCase().indexOf(search) > -1,
         )
       : this.options().data;
     this.setDropdownOptions(dropdownData);
@@ -188,7 +186,7 @@ export class DropdownComponent {
       this.allOptions = Array.from(
         this.displayOptions()?.map((x) => {
           return x.value;
-        })
+        }),
       );
     }
   };
@@ -200,12 +198,12 @@ export class DropdownComponent {
       this.isIndeterminate =
         this.displayOptions().length >
         this.displayOptions().filter(
-          (x) => selectedValue.findIndex((y) => y == x.value) > -1
+          (x) => selectedValue.findIndex((y) => y == x.value) > -1,
         ).length;
       this.isChecked =
         this.displayOptions().length ==
         this.displayOptions().filter(
-          (x) => selectedValue.findIndex((y) => y == x.value) > -1
+          (x) => selectedValue.findIndex((y) => y == x.value) > -1,
         ).length;
     } else {
       this.isIndeterminate = false;
@@ -231,7 +229,7 @@ export class DropdownComponent {
 
       // Filter to include only valid values from textvalue array
       selectedValue = selectedValue.filter(
-        (x) => this.options().data.findIndex((y) => y.value == x) > -1
+        (x) => this.options().data.findIndex((y) => y.value == x) > -1,
       );
 
       // Update control value without emitting event

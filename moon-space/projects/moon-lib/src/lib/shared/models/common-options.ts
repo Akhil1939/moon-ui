@@ -1,4 +1,4 @@
-import { ThemePalette } from "@angular/material/core";
+import { ThemePalette } from '@angular/material/core';
 
 /**
  * Configuration options for a base component.
@@ -32,5 +32,5 @@ export interface ComponentBaseOptions {
 }
 
 export interface CallBackFnOptions<T = any> {
-  [key: string]: T
+  [key: string]: T;
 }

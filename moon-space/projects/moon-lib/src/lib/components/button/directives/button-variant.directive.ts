@@ -7,7 +7,10 @@ import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 export class ButtonVariantDirective {
   @Input() buttonVariant: string = 'button'; // Default to 'button' if not provided
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  constructor(
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+  ) {}
 
   ngAfterViewInit(): void {
     this.setButtonAttributes();
