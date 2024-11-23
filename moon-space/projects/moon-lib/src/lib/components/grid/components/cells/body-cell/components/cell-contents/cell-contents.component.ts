@@ -7,6 +7,11 @@ import { Subject, takeUntil } from 'rxjs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { CellClickOptions } from '../../../../../models/cell';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'lib-cell-contents',
@@ -16,11 +21,19 @@ import { CellClickOptions } from '../../../../../models/cell';
     MatIconModule,
     MatTooltipModule,
     MatButtonModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
+    MatDatepickerModule
   ],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './cell-contents.component.html',
   styleUrl: './cell-contents.component.css'
 })
 export class CellContentsComponent implements OnInit, OnDestroy {
+onChange($event: any) {
+console.log($event.target.value)
+}
   @Input() element: any
   @Input() column: any;
   @Input() index = -1;

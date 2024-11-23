@@ -9,7 +9,7 @@
                 [ngStyle]="options?.getRowStyle && options?.getRowStyle({data: row, rowIndex: index, rowLevel:1})"></tr>
         }
         @if(level2DisplayedColumns.length > 0){
-        <tr mat-row *matRowDef="let row; columns: level2DisplayedColumns let index=index"
+        <tr  mat-row *matRowDef="let row; columns: level2DisplayedColumns let index=index"
                 [ngStyle]="options?.getRowStyle && options?.getRowStyle({data: row, rowIndex: index, rowLevel:2})"></tr>
         }
 </ng-container>
